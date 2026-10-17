@@ -18,7 +18,8 @@ st.caption("NFHS Basketball Rulebook & Case Adjudication Engine")
 
 @st.cache_resource(show_spinner=False)
 def get_gemini_client():
-    return genai.Client()
+    api_key = os.environ.get("GEMINI_API_KEY") or st.secrets.get("GEMINI_API_KEY")
+    return genai.Client(api_key=api_key)
 
 @st.cache_resource(show_spinner=False)
 def load_and_upload_rulebook(file_path="rulebook.pdf"):
